@@ -43,4 +43,7 @@ build_release
 load_release "milo-v1.5" "reference-skr3-ez-5160"
 build_release
 
+load_release "milo-v1.5" "milojfk-skr3-ez-h743-5160"
+build_release
+
 clean_cache_dir

@@ -1,0 +1,9 @@
+// Stepper Driver Type
+//                    X        Y        Z        E1    E2
+stepper.DriverType = {tmc5160, tmc5160, tmc5160, none, none}
+
+// Mainboard state LED
+leds.diagnostic = A.13
+
+// Disable thermistors
+heat.tempSensePins = {}

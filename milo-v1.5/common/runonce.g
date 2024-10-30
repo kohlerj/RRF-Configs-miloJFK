@@ -9,7 +9,7 @@ M552.1 S0
 echo { "Configuring WiFI Access Point - password is ""millenniummachines""." }
 
 ; Configure WiFi AP
-M589 S"Milo" P"millenniummachines" I192.168.40.1 C1
+M589 S"miloJFK_AP" P"millenniummachines" I192.168.40.1 C1
 
 ; Settle for a couple of seconds to allow the WiFi module to save the configuration
 G4 S5
