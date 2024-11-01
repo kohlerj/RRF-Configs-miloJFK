@@ -11,12 +11,12 @@
 
 ; Configure emergency stop input. You must set the C"..." parameter to
 ; the pin identifier where your emergency stop input is connected.
-M950 J1 C"<pin>"
+M950 J1 C"^PC_15"
 
 ; Fire trigger 0 (emergency stop) on status change
-M581 P1 T0 S1 R0
+M581 P1 T2 S1 R0
 
 ; Check e-stop is not active before continuing startup
 echo {"Checking E-Stop status..."}
-M582 T0
+M582 T2
 echo {"E-Stop is not activated, continuing startup"}
