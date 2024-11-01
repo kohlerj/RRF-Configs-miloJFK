@@ -106,8 +106,8 @@ function build_release() {
 
 	}
 
-	[[ ! -f "${CACHE_DIR}/${MOS_UI_DST_NAME}" ]] && {
-		wget -nv -O "${CACHE_DIR}/${MOS_UI_DST_NAME}" "${MOS_UI_URL}" || { echo "Failed to download ${MOS_UI_URL}"; exit 1; }
+	[[ ! -f "${CACHE_DIR}/${DWC_MOS_UI_DST_NAME}" ]] && {
+		wget -nv -O "${CACHE_DIR}/${DWC_MOS_UI_DST_NAME}" "${DWC_MOS_UI_URL}" || { echo "Failed to download ${DWC_MOS_UI_URL}"; exit 1; }
 	}
 
 	# Unzip RRF firmware to cache dir
@@ -126,8 +126,10 @@ function build_release() {
 	# Extract DWC files to correct location
 	unzip -o -q "${CACHE_DIR}/${DWC_DST_NAME}" -d "${TMP_DIR}/${WWW_DIR}"
 
+	# Add release notes to release zip
+	TEMP_NOTES_PATH="${CACHE_DIR}/notes.md"
 	[[ ! -z "${ENABLE_RNOTES}" ]] && {
-		cat <<-EOF >>"${RNOTES_PATH}"
+		cat <<-EOF > "${TEMP_NOTES_PATH}"
 		### ${MACHINE_ID^^}
 
 		#### Notes
@@ -142,11 +144,14 @@ function build_release() {
 		| DuetWiFiServer              | \`${WIFI_FIRMWARE_SRC_NAME}\`            | ${TG_RELEASE}      |
 		| DuetWebControl              | \`${DWC_SRC_NAME}\`                      | ${DUET_RELEASE}    |
 		| Configuration               | \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` | ${COMMIT_ID}       |
-		| Optionally, MillenniumOS    | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}     |
-		| Optionally, MillenniumOS_UI | \`${MOS_UI_SRC_NAME}\`                   | ${MOS_UI_RELEASE}  |
 		---
 
 		EOF
+	}
+
+	# Append notes to the release notes path and create the new output file
+	[[ ! -z "${ENABLE_RNOTES}" ]] && {
+		cat "${CACHE_DIR}/${RNOTES_PATH}" "${TEMP_NOTES_PATH}" > "${RNOTES_PATH}"
 	}
 
 	# Create release zip with default files
@@ -154,9 +159,49 @@ function build_release() {
 	zip -qr "${ZIP_PATH}.zip" *
 	cd "${WD}"
 
+	####### MOS RELEASE #######
+
+	# Remove existing release notes
+	[[ ! -z "${ENABLE_RNOTES}" ]] && rm ${RNOTES_PATH}
+
+	# Add MOS files to release zip
 	unzip -o -q "${CACHE_DIR}/${MOS_DST_NAME}" -d "${TMP_DIR}/"
 
-	cp "${CACHE_DIR}/${MOS_UI_DST_NAME}" "${TMP_DIR}"
+	# First remove the existing DWC files
+	rm -rf "${TMP_DIR}/${WWW_DIR}/"
+
+	# Add DWC files to release zip
+	unzip -o -q "${CACHE_DIR}/${DWC_MOS_UI_DST_NAME}" -d "${TMP_DIR}/${WWW_DIR}"
+
+	# Add release notes to release zip
+	TEMP_NOTES_PATH="${CACHE_DIR}/notes.md"
+	[[ ! -z "${ENABLE_RNOTES}" ]] && {
+		cat <<-EOF > "${TEMP_NOTES_PATH}"
+		### ${MACHINE_ID^^}
+
+		#### Notes
+
+		${BOARD_NOTES}
+
+		#### Contains
+
+		| Component                   | Source File(s)                           | Version            |
+		| --------------------------- | ---------------------------------------- | ------------------ |
+		| RepRapFirmware              | \`${RRF_FIRMWARE_SRC_NAME}\`             | ${TG_RELEASE}      |
+		| DuetWiFiServer              | \`${WIFI_FIRMWARE_SRC_NAME}\`            | ${TG_RELEASE}      |
+		| DuetWebControl              | \`${DWC_MOS_UI_SRC_NAME}\`               | ${DUET_RELEASE}    |
+		| Configuration               | \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` | ${COMMIT_ID}       |
+		| MillenniumOS                | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}     |
+		| MillenniumOS_UI             | \`${DWC_MOS_UI_SRC_NAME}\`               | ${MOS_UI_RELEASE}  |
+		---
+
+		EOF
+	}
+
+	# Append notes to the release notes path and create the new output file
+	[[ ! -z "${ENABLE_RNOTES}" ]] && {
+		cat "${CACHE_DIR}/${RNOTES_PATH}" "${TEMP_NOTES_PATH}" > "${RNOTES_PATH}"
+	}
 
 	cd "${TMP_DIR}"
 	zip -qr "${ZIP_PATH}-with-mos.zip" *

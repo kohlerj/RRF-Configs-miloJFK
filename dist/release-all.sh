@@ -16,8 +16,7 @@ make_cache_dir
 ENABLE_RNOTES="aww yiss"
 
 # Add release notes header
-rm -f "${RNOTES_PATH}"
-cat <<-EOF >>"${RNOTES_PATH}"
+cat <<-EOF >"${CACHE_DIR}/${RNOTES_PATH}"
 	# Release ${COMMIT_ID}
 
 	## Upgrading
