@@ -106,6 +106,10 @@ function build_release() {
 
 	}
 
+	[[ ! -f "${CACHE_DIR}/${MOS_UI_DST_NAME}" ]] && {
+		wget -nv -O "${CACHE_DIR}/${MOS_UI_DST_NAME}" "${MOS_UI_URL}" || { echo "Failed to download ${MOS_UI_URL}"; exit 1; }
+	}
+
 	# Unzip RRF firmware to cache dir
 	unzip -o -q "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" -d "${CACHE_DIR}/"
 
@@ -132,14 +136,14 @@ function build_release() {
 
 		#### Contains
 
-		| Component                | Source File(s)                           | Version         |
-		| ------------------------ | ---------------------------------------- | --------------- |
-		| RepRapFirmware           | \`${RRF_FIRMWARE_SRC_NAME}\`             | ${TG_RELEASE}   |
-		| DuetWiFiServer           | \`${WIFI_FIRMWARE_SRC_NAME}\`            | ${TG_RELEASE}   |
-		| DuetWebControl           | \`${DWC_SRC_NAME}\`                      | ${DUET_RELEASE} |
-		| Configuration            | \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` | ${COMMIT_ID}    |
-		| Optionally, MillenniumOS | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}  |
-
+		| Component                   | Source File(s)                           | Version            |
+		| --------------------------- | ---------------------------------------- | ------------------ |
+		| RepRapFirmware              | \`${RRF_FIRMWARE_SRC_NAME}\`             | ${TG_RELEASE}      |
+		| DuetWiFiServer              | \`${WIFI_FIRMWARE_SRC_NAME}\`            | ${TG_RELEASE}      |
+		| DuetWebControl              | \`${DWC_SRC_NAME}\`                      | ${DUET_RELEASE}    |
+		| Configuration               | \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` | ${COMMIT_ID}       |
+		| Optionally, MillenniumOS    | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}     |
+		| Optionally, MillenniumOS_UI | \`${MOS_UI_SRC_NAME}\`                   | ${MOS_UI_RELEASE}  |
 		---
 
 		EOF
@@ -151,6 +155,8 @@ function build_release() {
 	cd "${WD}"
 
 	unzip -o -q "${CACHE_DIR}/${MOS_DST_NAME}" -d "${TMP_DIR}/"
+
+	cp "${CACHE_DIR}/${MOS_UI_DST_NAME}" "${TMP_DIR}"
 
 	cd "${TMP_DIR}"
 	zip -qr "${ZIP_PATH}-with-mos.zip" *
