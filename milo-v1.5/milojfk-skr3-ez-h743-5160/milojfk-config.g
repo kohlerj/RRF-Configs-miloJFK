@@ -1,4 +1,4 @@
-; user-config.g - Configure machine or user-specific overrides
+; milojfk-config.g - Configure miloJFK specific parts
 
 ; Use this to set calibrated steps-per-mm
 M92 X797.7 Y797.65 Z1597.4

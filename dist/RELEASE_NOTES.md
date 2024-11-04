@@ -1,4 +1,4 @@
-# Release v19.10.24-stable-5-g41b3cd8-dirty
+# Release v19.10.24-stable-6-g7b1a303-dirty
 
 ## Upgrading
 
@@ -24,7 +24,7 @@ For miloJFK using the SKR3-EZ (h743) with esp32 WiFi, external BTT 5160 drivers 
 | RepRapFirmware              | `firmware_skr3ez_h743.bin`             | 3.5.3      |
 | DuetWiFiServer              | `WiFiModule_esp32.bin`            | 3.5.3      |
 | DuetWebControl              | `DuetWebControl-SD-v3.5.3-with-mosUI.zip`               | 3.5.3    |
-| Configuration               | `milo-v1.5/common` and `milo-v1.5/milojfk-skr3-ez-h743-5160` | v19.10.24-stable-5-g41b3cd8-dirty       |
+| Configuration               | `milo-v1.5/common` and `milo-v1.5/milojfk-skr3-ez-h743-5160` | v19.10.24-stable-6-g7b1a303-dirty       |
 | MillenniumOS                | `mos-release-v0.4.1.zip`                      | 0.4.1     |
 | MillenniumOS_UI             | `DuetWebControl-SD-v3.5.3-with-mosUI.zip`               | 0.0.3  |
 ---

@@ -33,6 +33,10 @@ if { fileexists("touchprobe.g") }
     M98 P"touchprobe.g"
 
 ; Load a user configuration file if it exists
+if { fileexists("milojfk-config.g") }
+    M98 P"milojfk-config.g"
+
+; Load a user configuration file if it exists
 if { fileexists("user-config.g") }
     M98 P"user-config.g"
 
