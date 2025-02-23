@@ -143,10 +143,6 @@ function build_release() {
 
 	}
 
-	[[ ! -f "${CACHE_DIR}/${DWC_MOS_UI_DST_NAME}" ]] && {
-		wget -nv -O "${CACHE_DIR}/${DWC_MOS_UI_DST_NAME}" "${DWC_MOS_UI_URL}" || { echo "Failed to download ${DWC_MOS_UI_URL}"; exit 1; }
-	}
-
 	# Unzip RRF firmware to cache dir
 	unzip -o -q "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" -d "${CACHE_DIR}/"
 
@@ -205,12 +201,6 @@ function build_release() {
 	# Add MOS files to release zip
 	unzip -o -q "${CACHE_DIR}/${MOS_DST_NAME}" -d "${TMP_DIR}/"
 
-	# First remove the existing DWC files
-	rm -rf "${TMP_DIR}/${WWW_DIR}/"
-
-	# Add DWC files to release zip
-	unzip -o -q "${CACHE_DIR}/${DWC_MOS_UI_DST_NAME}" -d "${TMP_DIR}/${WWW_DIR}"
-
 	# Add release notes to release zip
 	TEMP_NOTES_PATH="${CACHE_DIR}/notes.md"
 	[[ ! -z "${ENABLE_RNOTES}" ]] && {
@@ -230,7 +220,6 @@ function build_release() {
 		| DuetWebControl              | \`${DWC_MOS_UI_SRC_NAME}\`               | ${DUET_RELEASE}    |
 		| Configuration               | \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` | ${COMMIT_ID}       |
 		| MillenniumOS                | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}     |
-		| MillenniumOS_UI             | \`${DWC_MOS_UI_SRC_NAME}\`               | ${MOS_UI_RELEASE}  |
 		---
 
 		EOF
