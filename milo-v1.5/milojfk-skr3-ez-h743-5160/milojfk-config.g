@@ -1,5 +1,8 @@
 ; milojfk-config.g - Configure miloJFK specific parts
 
+; Set machine name
+M550 P"miloJFK"
+
 ; Use this to set calibrated steps-per-mm
 M92 X797.7 Y797.65 Z1597.4
 

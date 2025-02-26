@@ -35,10 +35,10 @@ M350 X32 Y32 Z32
 M92 X800 Y800 Z1600
 
 ; Set motor currents (mA)
-M906 X2300 Y2300 Z1500
+M906 X2800 Y2800 Z2800
 
-; Set standstill current reduction to 5%
-M917 X5 Y5 Z5
+; Set standstill current reduction to 10%
+M917 X10 Y10 Z10
 
 ; Enable motor idle current reduction after 30 seconds
 M84 S30
