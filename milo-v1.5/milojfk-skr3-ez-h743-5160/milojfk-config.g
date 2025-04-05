@@ -27,3 +27,6 @@ M150 E0 R255 B255 P100 S100 F0
 
 ; Turn on the LED
 M42 P1 S0.5
+
+; Pendant configuration
+
