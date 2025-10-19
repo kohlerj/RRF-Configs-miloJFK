@@ -7,3 +7,6 @@ leds.diagnostic = A.13
 
 // Disable thermistors
 heat.tempSensePins = {}
+
+// AUX2
+serial.aux2.rxTxPins={E.7, E.8}
