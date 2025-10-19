@@ -8,4 +8,4 @@
 ; T1200    - Travel speed, mm/min
 ; F600:300 - Probe Speed rough / fine, mm/min
 
-M558 K1 P8 C"!PC_2" H5 A5 S0.01 T1200 F600:300
+M558 K1 P8 C"!PC_2" H8 A5 S0.01 T1200 F600:300

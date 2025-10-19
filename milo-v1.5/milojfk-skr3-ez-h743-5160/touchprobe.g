@@ -8,4 +8,4 @@
 ; T1200    - Travel speed, mm/min
 ; F300:50  - Probe Speed rough / fine, mm/min
 
-M558 K0 P5 C"PA_0" H2 A10 S0.01 T1200 F300:50
+M558 K0 P5 C"PA_0" H5 A10 S0.01 T1200 F300:50
