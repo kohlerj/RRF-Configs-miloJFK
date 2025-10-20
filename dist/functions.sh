@@ -220,6 +220,11 @@ function build_release() {
 
 	# RRF STM32 is now released as a single Zip file
 	# Copy firmware files to correct location
+	[[ ! -f "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" ]] && [[ -f "${SD}/../${RRF_FIRMWARE_ZIP_NAME}" ]] && 
+	{
+		cp "${SD}/../${RRF_FIRMWARE_ZIP_NAME}" "${CACHE_DIR}"
+	}
+
 	[[ ! -f "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" ]] && {
 		wget -nv -O "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" "${RRF_FIRMWARE_URL}" || { echo "Failed to download ${RRF_FIRMWARE_URL}"; exit 1; }
 	}
