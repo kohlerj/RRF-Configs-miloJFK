@@ -13,9 +13,9 @@ else
 if { fileexists("pre-e-stop-user-config.g") }
     M98 P"pre-e-stop-user-config.g"
 
-; Configure optional software emergency stop.
-if { fileexists("estop.g") }
-    M98 P"estop.g"
+; Configure optional triggers.
+if { fileexists("configure-triggers.g") }
+    M98 P"configure-triggers.g"
 
 ; Continue with configuration.
 M98 P"movement.g"
@@ -43,4 +43,7 @@ if { fileexists("user-config.g") }
 ; Load MillenniumOS if it has been installed.
 if { fileexists("mos.g") }
     M98 P"mos.g"
-    
+
+; Load ArborCTL
+if { fileexists("arborctl.g") }
+    M98 P"arborctl.g"

@@ -3,6 +3,9 @@
 ; Set machine name
 M550 P"miloJFK"
 
+; Enable segmentation
+M669 S0.5
+
 ; Use this to set calibrated steps-per-mm
 M92 X797.7 Y797.65 Z1597.4
 
@@ -28,5 +31,5 @@ M150 E0 R255 B255 P100 S100 F0
 ; Turn on the LED
 M42 P1 S0.5
 
-; Pendant configuration
-
+; Pendant in PanelDue mode
+M575 P1 B57600 S4

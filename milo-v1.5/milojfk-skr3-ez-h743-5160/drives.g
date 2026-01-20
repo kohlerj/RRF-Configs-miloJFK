@@ -1,26 +1,26 @@
 ; drives.g - Configures motor driver settings
 
 ; Physical drive 0 (X) goes forwards using default driver timings
-M569 P0 S1
-
-; Physical drive 1 (Y) goes forwards using default driver timings
-M569 P1 S1
-
-; Physical drive 2 (Z) goes forwards using default driver timings
 M569 P2 S1
 
+; Physical drive 1 (Y) goes forwards using default driver timings
+M569 P4 S1
+
+; Physical drive 2 (Z) goes forwards using default driver timings
+M569 P0 S1
+
 ; Change default short filter bandwidth due to longer cables
-M569.2 P0 R{0x09} V{0x1060A}
-M569.2 P1 R{0x09} V{0x1060A}
-M569.2 P2 R{0x09} V{0x1060A}
+;M569.2 P2 R{0x09} V{0x1060A}
+;M569.2 P4 R{0x09} V{0x1060A}
+;M569.2 P0 R{0x09} V{0x1060A}
 
 ; Set non-standard sense resistors for the BTT 5160 drivers
-M569.9 P0.0 R0.022
-M569.9 P0.1 R0.022
 M569.9 P0.2 R0.022
+M569.9 P0.4 R0.022
+M569.9 P0.0 R0.022
 
 ; Set drive mappings to relevant axes
-M584 X0 Y1 Z2
+M584 X2 Y4 Z0
 
 ; Configure microstepping, no interpolation.
 ; This is about as high as we can go without losing

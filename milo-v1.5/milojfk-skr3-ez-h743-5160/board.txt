@@ -1,6 +1,6 @@
 // Stepper Driver Type
 //                    X        Y        Z        E1    E2
-stepper.DriverType = {tmc5160, tmc5160, tmc5160, none, none}
+stepper.DriverType = {tmc5160, none, tmc5160, none, tmc5160}
 
 // Mainboard state LED
 leds.diagnostic = A.13

@@ -134,7 +134,9 @@
             10000,
             0
         ],
-        "enabledPlugins": [],
+                "enabledPlugins": [
+                    "MillenniumOS"
+                ],
         "plugins": {}
     }
 }
